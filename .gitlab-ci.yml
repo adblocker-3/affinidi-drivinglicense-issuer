@@ -4,7 +4,7 @@ include:
     file: 'security.yml'
 
 stages:
-  - test
+  # - test
   - security-testing
 
 .node-base:
@@ -20,10 +20,10 @@ stages:
       - .npm/
       - node_modules/
 
-test-unit:
-  stage: test
-  extends: .node-base
-  script:
-    - npm run test
-  except:
-    - /^release-.*$/ 
+# test-unit:
+#   stage: test
+#   extends: .node-base
+#   script:
+#     - npm run test
+#   except:
+#     - /^release-.*$/ 
