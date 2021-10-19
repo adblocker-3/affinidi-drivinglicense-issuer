@@ -1,7 +1,7 @@
-import {cloudWalletApi, issuerApi} from 'utils/api';
-import {endpoints} from 'constants/endpoints';
+import { cloudWalletApi, issuerApi } from 'utils/api';
+import { endpoints } from 'constants/endpoints';
 import ApiService from 'utils/apiService';
-import {drivingLicenseVCData, signedDrivingLicenseVC, unsignedDrivingLicenseVC} from 'utils/vc-data-examples/drivinglicense';
+import { drivingLicenseVCData, signedDrivingLicenseVC, unsignedDrivingLicenseVC } from 'utils/vc-data-examples/drivinglicense';
 
 let mockCloudWalletApiPost: jest.SpyInstance
 let mockCloudWalletApiGet: jest.SpyInstance
@@ -33,26 +33,15 @@ describe('ApiService methods', () => {
   const accessToken = 'accessToken';
   const did = 'did';
 
-  test('signUp method', async () => {
-    mockCloudWalletApiPost.mockImplementation(() => Promise.resolve({
-      accessToken,
-      did
-    }));
-
-    await ApiService.signUp(username,password)
-
-    expect(mockCloudWalletApiPost).toHaveBeenCalledWith(endpoints.SIGNUP, {username, password})
-  })
-
   test('logIn method', async () => {
     mockCloudWalletApiPost.mockImplementation(() => Promise.resolve({
       accessToken,
       did
     }));
 
-    await ApiService.logIn(username,password)
+    await ApiService.logIn(username, password)
 
-    expect(mockCloudWalletApiPost).toHaveBeenCalledWith(endpoints.LOGIN, {username, password})
+    expect(mockCloudWalletApiPost).toHaveBeenCalledWith(endpoints.LOGIN, { username, password })
   })
 
   test('clientSideLogin method', async () => {
@@ -75,7 +64,7 @@ describe('ApiService methods', () => {
   })
 
   test('issueUnsignedVC method', async () => {
-    const example = {...drivingLicenseVCData}
+    const example = { ...drivingLicenseVCData }
     example.holderDid = '';
 
     mockIssuerApiPost.mockImplementation(() => Promise.resolve({
@@ -143,7 +132,7 @@ describe('ApiService methods', () => {
     expect(mockSaveDidTokenToLocalStorage).toBeCalledTimes(1);
   })
 
-  test('removeAccessAndDidTokens method', async ()=>{
+  test('removeAccessAndDidTokens method', async () => {
     ApiService.removeAccessAndDidTokens()
     expect(mockRemoveAccessTokenFromLocalStorage).toBeCalledTimes(1);
     expect(mockRemoveDidTokenFromLocalStorage).toBeCalledTimes(1);
@@ -155,7 +144,7 @@ describe('ApiService methods', () => {
   })
 
   test('saveAccessTokenToLocalStorage method', async () => {
-    jest.spyOn(console, 'error').mockImplementation(() => {})
+    jest.spyOn(console, 'error').mockImplementation(() => { })
     jest.spyOn(global.localStorage.__proto__, 'setItem').mockImplementation(() => {
       throw new Error('No reason')
     })
@@ -166,7 +155,7 @@ describe('ApiService methods', () => {
   })
 
   test('getAccessTokenFromLocalStorage method', async () => {
-    jest.spyOn(console, 'error').mockImplementation(() => {})
+    jest.spyOn(console, 'error').mockImplementation(() => { })
     jest.spyOn(global.localStorage.__proto__, 'getItem').mockImplementation(() => {
       throw new Error('No reason')
     })
@@ -177,7 +166,7 @@ describe('ApiService methods', () => {
   })
 
   test('removeAccessTokenFromLocalStorage method', async () => {
-    jest.spyOn(console, 'error').mockImplementation(() => {})
+    jest.spyOn(console, 'error').mockImplementation(() => { })
     jest.spyOn(global.localStorage.__proto__, 'removeItem').mockImplementation(() => {
       throw new Error('No reason')
     })
@@ -188,7 +177,7 @@ describe('ApiService methods', () => {
   })
 
   test('saveDidTokenToLocalStorage method', async () => {
-    jest.spyOn(console, 'error').mockImplementation(() => {})
+    jest.spyOn(console, 'error').mockImplementation(() => { })
     jest.spyOn(global.localStorage.__proto__, 'setItem').mockImplementation(() => {
       throw new Error('No reason')
     })
@@ -199,7 +188,7 @@ describe('ApiService methods', () => {
   })
 
   test('getDidTokenToLocalStorage method', async () => {
-    jest.spyOn(console, 'error').mockImplementation(() => {})
+    jest.spyOn(console, 'error').mockImplementation(() => { })
     jest.spyOn(global.localStorage.__proto__, 'getItem').mockImplementation(() => {
       throw new Error('No reason')
     })
@@ -210,7 +199,7 @@ describe('ApiService methods', () => {
   })
 
   test('removeDidTokenFromLocalStorage method', async () => {
-    jest.spyOn(console, 'error').mockImplementation(() => {})
+    jest.spyOn(console, 'error').mockImplementation(() => { })
     jest.spyOn(global.localStorage.__proto__, 'removeItem').mockImplementation(() => {
       throw new Error('No reason')
     })
@@ -239,7 +228,7 @@ describe('ApiService methods', () => {
       qrCode: "testQRCode",
       sharingUrl: "testSharingURL"
     }
-    mockCloudWalletApiPost.mockImplementation(()=>{
+    mockCloudWalletApiPost.mockImplementation(() => {
       const a = {
         data: returnData
       }
@@ -249,7 +238,7 @@ describe('ApiService methods', () => {
     expect(mockCloudWalletApiPost).toBeCalledWith(`${endpoints.WALLET_CREDENTIALS}/${testClaimID}/share`)
   })
 
-  afterEach(()=>{
+  afterEach(() => {
     mockStoreAccessAndDidToken.mockRestore()
     mockSetAuthorizationBearer.mockRestore()
     mockSaveAccessTokenToLocalStorage.mockRestore()
@@ -259,4 +248,4 @@ describe('ApiService methods', () => {
   })
 })
 
-export {}
+export { }
