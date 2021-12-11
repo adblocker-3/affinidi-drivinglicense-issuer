@@ -70,8 +70,8 @@ const Application: React.FC = (): React.ReactElement => {
           idClass: JSON.stringify(vcToStringify),
           holderDid: inputDID || appState.didToken || '',
         }
-
-        // Store unsignedVC into issuer's datsabase
+        console.log("application:73")
+        // Store unsignedVC into issuer's database
         const db = firebase.firestore();
         db.collection('drivinglicense-waiting-approval').add({username: appState.username, payload, applicationID, approved: false})
 
