@@ -1,27 +1,27 @@
 /**
  * Sample VC data for the employment type.
  * */
-import {UnsignedW3cCredential, VCBuildUnsignedInput, W3cCredential} from 'utils/apis';
+import { UnsignedW3cCredential, VCBuildUnsignedInput, W3cCredential } from 'utils/apis';
 
 export const drivingLicenseVCData: VCBuildUnsignedInput = {
   "type": "IDDocumentCredentialPersonV1",
   "data": {
-    '@type': ['Person', 'PersonE', 'IDDocumentPerson'],
+    '@type': ['Person', 'PersonE', 'IDDocumentPerson', 'HealthCert'],
     "gender": 'Male',
     "birthDate": '1986-07-01T00:00:00.000Z',
     "givenName": 'Oleksander',
     "familyName": 'Kravets',
     "address": 'apt. 9, Pushkinsakya 31-V, Kyiv, Ukraine',
     "hasIDDocument": {
-      '@type': ['Role', 'IDDocumentRole'],
+      '@type': ['Role', 'IDDocumentRole', 'HealthCert'],
       "hasIDDocument": {
-        '@type': 'IDDocument',
-        "issuer": 'Automobile Association of Singapore',
-        "documentType": 'driving_license',
+        '@type': 'HealthCert',
+        "issuer": 'Changi General Hospital',
+        "documentType": 'injury_certification',
         "issueDate": '2019...',
         "classificationMethod": 'automatic',
-        "idClass": '...',
-        "countryCode": '...',
+        "medicalCondition": '',
+        "patientID": ''
       },
     },
   },
@@ -175,8 +175,8 @@ export const unsignedDrivingLicenseVC: UnsignedW3cCredential = {
         ],
         "hasIDDocument": {
           "@type": "IDDocument",
-          "issuer": "Automobile Association of Singapore",
-          "documentType": "driving_license",
+          "issuer": "Changi General Hospital",
+          "documentType": "injury_certification",
           "issueDate": "",
           "classificationMethod": "automatic",
           "idClass": "{\"drivingLicenseID\":\"\",\"country\":\"Singapore\",\"drivingClass\":\"1\"}",

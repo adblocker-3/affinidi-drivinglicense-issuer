@@ -17,6 +17,7 @@ interface IProps {
 const AdminList: React.FC<IProps & RouteComponentProps> = (props): any => {
   const history = useHistory();
   const { applicationID } = props.data;
+  console.log(props.data.payload)
   const { givenName="", familyName="" } = props.data.payload
 
   const viewApplication = () => {

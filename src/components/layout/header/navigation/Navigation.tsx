@@ -1,12 +1,12 @@
-import React, {useContext, useState} from 'react';
-import {Link, NavLink} from 'react-router-dom';
-import {Container, Nav, Navbar, NavbarBrand} from 'react-bootstrap'
-import {routes} from 'constants/routes'
+import React, { useContext, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { Container, Nav, Navbar, NavbarBrand } from 'react-bootstrap'
+import { routes } from 'constants/routes'
 import 'components/layout/header/navigation/Navigation.scss'
 import AppContext from 'context/app';
 import UserLogout from 'components/user/logout/Logout';
 import drivingLicenseLogo from 'assets/images/icons/driving-license.svg';
-import companyNameLogo from 'assets/images/icons/company-name.png';
+import companyNameLogo from 'assets/images/icons/logo.png';
 
 /**
  * Stateful component responsible for rendering the top navigation of this application.
@@ -16,7 +16,7 @@ import companyNameLogo from 'assets/images/icons/company-name.png';
  * */
 const LayoutHeaderNavigation = () => {
   const [showNavbar, setShowNavbar] = useState<boolean>(false);
-  const {appState} = useContext(AppContext)
+  const { appState } = useContext(AppContext)
 
   // In order to fix the "findDOMNode" warning in the navbar collapse component,
   // a custom toggle control function was implemented. Currently, some bootstrap components
@@ -24,15 +24,13 @@ const LayoutHeaderNavigation = () => {
   // bootstrap components are updated.
   return (
     <Navbar expand="lg"
-            onToggle={() => setShowNavbar(!showNavbar)}
-            expanded={false}
-            className='bg-orange'
+      onToggle={() => setShowNavbar(!showNavbar)}
+      expanded={false}
     >
       <Container>
         <NavbarBrand>
           <Link to={routes.ROOT}>
-            <img src={drivingLicenseLogo} className='logo-icon' alt='logo'/>
-            <img src={companyNameLogo} className='logo-name' alt='logo-name'/>
+            <img src={companyNameLogo} className='logo-name' alt='logo-name' />
           </Link>
         </NavbarBrand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

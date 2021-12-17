@@ -20,7 +20,7 @@ const ApplicationInfoPage: React.FC<IProps & RouteComponentProps> = (
 	const { username, payload, applicationID, docID, approved } =
 		props.location.state.state;
 	const { givenName, familyName, holderDid, idClass, issueDate } = payload;
-	const { country, drivingClass, email, issuerOrganization } =
+	const { country, medicalCondition, email, issuerOrganization } =
 		JSON.parse(idClass);
 
 	const history = useHistory();
@@ -46,6 +46,7 @@ const ApplicationInfoPage: React.FC<IProps & RouteComponentProps> = (
 				example.data.email = email;
 				example.data.hasIDDocument.hasIDDocument.issueDate = issueDate;
 				example.data.hasIDDocument.hasIDDocument.idClass = idClass;
+				example.data.medicalCondition = medicalCondition
 				example.holderDid = holderDid || '';
 
 				// Build unsigned VC
@@ -70,14 +71,14 @@ const ApplicationInfoPage: React.FC<IProps & RouteComponentProps> = (
 
 				const db = firebase.firestore();
 				// Store the information under Approved Table
-				db.collection('drivinglicense-approved').add({
+				db.collection('health-cert').add({
 					username,
 					payload,
 					applicationID,
 					approved: true,
 				});
 				// Delete the information under the Pending Approval Table
-				db.collection('drivinglicense-waiting-approval').doc(docID).delete();
+				db.collection('pending-health-cert').doc(docID).delete();
 
 				alert('Application has been approved and have alerted the applicant.');
 				history.push(routes.ISSUER);
@@ -109,7 +110,7 @@ const ApplicationInfoPage: React.FC<IProps & RouteComponentProps> = (
 					<strong>Country of Issuance:</strong> {country}
 				</p>
 				<p>
-					<strong>Driving Class:</strong> {drivingClass}
+					<strong>Medical Condition:</strong> {medicalCondition}
 				</p>
 				<Button style={{ display: 'block', margin: '10px 0 0 0' }}>
 					View Proof of Document
